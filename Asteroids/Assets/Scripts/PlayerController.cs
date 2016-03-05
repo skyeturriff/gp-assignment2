@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;         // Allows physics actions to be applied to player 
     float movementSpeed;    // Controls magnitude of force applied to player
-    float rotationSpeed;    
-
+    float rotationSpeed;
+    public GameObject bullet;   // Reference to bullet prefab player will fire
 
 	void Start () 
     {
@@ -23,6 +23,14 @@ public class PlayerController : MonoBehaviour
 
         // Rotate the player left or right
         transform.Rotate(transform.forward, -moveHorizontal * rotationSpeed); 
+
+        // Check for fire
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject spawnedBullet = GameObject.Instantiate(bullet);
+            spawnedBullet.transform.position = transform.position;
+            spawnedBullet.transform.rotation = transform.rotation;
+        }
     }
 
 
