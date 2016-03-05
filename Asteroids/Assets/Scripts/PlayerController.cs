@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {
+    GameController gameController;  // Reference to the GameController object in this scene
     Rigidbody2D rb;         // Allows physics actions to be applied to player 
     float movementSpeed;    // Controls magnitude of force applied to player
     float rotationSpeed;
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
 	void Start () 
     {
+        // Set gameController to GameController object active in scene
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         rb = GetComponent<Rigidbody2D>();
         movementSpeed = 5.0f;
         rotationSpeed = 3.0f;
@@ -46,8 +49,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Enemy"))
         {
             collider.gameObject.SetActive(false);
-
-            // LOSE LIFE OR GAME OVER
+            gameController.RemoveLife();
         }
     }
 }

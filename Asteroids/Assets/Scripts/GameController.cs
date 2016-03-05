@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
  * This script is primarily responsible for spawning Enemies. Enemies are 
@@ -14,11 +15,15 @@ public class GameController : MonoBehaviour
     public GameObject enemy;    // Reference to enemy prefab
     public Text scoreText;      // Displays current score to user
     int score;                  // Holds the user's current score
+    public Text lifeText;       // Displays current life count
+    int lifeCount;              // The current number of lives the snake has
 
     void Start()
     {
         score = 0;
         UpdateScore();
+        lifeCount = 3;
+        UpdateLives();
         waveSize = 5;
         spawnInterval = 7.0f;
         SpawnEnemyWave();
@@ -54,6 +59,26 @@ public class GameController : MonoBehaviour
     void UpdateScore()
     {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    // Decriment user's lives
+    public void RemoveLife()
+    {
+        if (lifeCount > 0)
+        {
+            --lifeCount;
+            UpdateLives();
+        }
+        if (lifeCount == 0) // Game is over, restart level
+        {
+            SceneManager.LoadScene("Main");
+        }
+    }
+
+    // Update life count display
+    void UpdateLives()
+    {
+        lifeText.text = "Lives: " + lifeCount.ToString();
     }
 	
 }
