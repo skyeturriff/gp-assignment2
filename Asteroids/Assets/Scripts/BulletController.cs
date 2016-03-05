@@ -16,13 +16,12 @@ public class BulletController : MonoBehaviour
 	void Start () 
     {
         rb = GetComponent<Rigidbody2D>();
-        movementSpeed = 1.0f;
+        movementSpeed = 3.0f;
         lifespan = 2.0f;
         timeAlive = Time.time;
 	}
 
-
-    // Calcualate how long bullet has been active for, and set bullet
+    // Calculate how long bullet has been active for, and set bullet
     // to inactive if it is longer than the allowed lifespan
     void Update()
     {
@@ -30,8 +29,7 @@ public class BulletController : MonoBehaviour
 
         if (timeSinceAlive >= lifespan)
             gameObject.SetActive(false);
-    }
-	
+    }	
 
     // Propell bullet forward in its current direction
     void FixedUpdate()

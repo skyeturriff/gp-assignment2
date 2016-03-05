@@ -8,11 +8,12 @@ using System.Collections;
  */
 public class BoundaryWrapper : MonoBehaviour 
 {
-    public Camera mainCamera;   // Camera to query screen bounds
+    Camera mainCamera;      // Camera to query screen bounds
     Vector2 screenSize;     // Holds screen bounds information
 
 	void Start () 
     {
+        mainCamera = Camera.main;
         screenSize.y = mainCamera.orthographicSize;     // half screen height
         screenSize.x = screenSize.y * mainCamera.aspect;    // half screen width
 	}

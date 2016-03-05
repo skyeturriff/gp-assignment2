@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
         rotationSpeed = 3.0f;
 	}
 
-
     void Update()
     {
         // Check for change in player's direction (rotation)
@@ -33,11 +32,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void FixedUpdate()
     {
         // Apply force in the direction the player is currently facing
         if (Input.GetKey(KeyCode.UpArrow))
             rb.AddForce(transform.up * movementSpeed);
+    }
+
+    // If GameObject collides with an Enemy, the Enemy dissapears
+    // and the Player loses a life, until no lives are left
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Enemy"))
+        {
+            collider.gameObject.SetActive(false);
+
+            // LOSE LIFE OR GAME OVER
+        }
     }
 }
